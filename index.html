@@ -72,10 +72,32 @@
     .project:hover{transform:translateY(-8px)}
     .project:hover img{transform:scale(1.35)}
 
-    /* SKILLS */
-    #skills{padding:30px 22px}
-    .skills-list{display:flex;flex-wrap:wrap;gap:12px;max-width:900px;margin:0 auto}
-    .skill{padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--pink2));color:#0a0010;font-weight:800;box-shadow:0 6px 22px rgba(255,77,221,0.12)}
+    /* SKILLS AS CARDS */
+.skills-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+  gap:26px;
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.skill{
+  background:var(--card);
+  padding:40px 20px;
+  border-radius:22px;
+  text-align:center;
+  font-size:22px;
+  font-weight:800;
+  color:var(--pink2);
+  box-shadow:0 10px 30px rgba(255,43,213,0.08);
+  transition:transform .35s, box-shadow .35s;
+}
+
+.skill:hover{
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 20px 40px rgba(255,43,213,0.18);
+}
+
 
     /* STICKERS */
     .sticker{position:fixed;z-index:1003;pointer-events:none;font-size:28px;transition:transform .25s;animation:stickerfloat 6s ease-in-out infinite}
@@ -91,8 +113,476 @@
       font-weight: normal;
       font-style: normal;
     }
+    /* CAROUSEL */
+.carousel{
+  position:relative;
+  max-width:1100px;
+  margin:30px auto;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.carousel-window{
+  overflow:hidden;
+  width:100%;
+}
+
+.carousel-track{
+  display:flex;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1);
+}
+
+.carousel-slide{
+  min-width:100%;
+  padding:10px;
+}
+
+.carousel-images{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.carousel-images img{
+  width:100%;
+  border-radius:14px;
+  box-shadow:0 6px 20px rgba(255,43,213,0.15);
+  transition:transform .5s;
+}
+
+.carousel-images img:hover{
+  transform:scale(1.18);
+}
+
+.carousel-caption{
+  text-align:center;
+  margin-top:14px;
+  font-size:22px;
+  color:var(--pink2);
+  font-weight:700;
+  text-shadow:0 0 12px var(--neon);
+}
+
+.carousel-btn{
+  background:none;
+  border:none;
+  color:var(--pink2);
+  font-size:48px;
+  cursor:pointer;
+  text-shadow:0 0 14px var(--neon);
+  transition:transform .2s;
+}
+
+.carousel-btn:hover{
+  transform:scale(1.3);
+}
+
+@media(max-width:900px){
+  .carousel-images{
+    grid-template-columns:1fr;
+  }
+}
+/* QUOTE BLOCK */
+.quote-block{
+  background:var(--bg);
+  padding:70px 20px;
+  margin:80px 0;
+}
+
+.quote-content{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.quote-text{
+  max-width:700px;
+  position:relative;
+  font-size:20px;
+  line-height:1.6;
+  color:var(--text);
+}
+
+.quote-mark{
+  font-size:80px;
+  color:rgba(255,255,255,0.08);
+}
+
+.quote-author{
+  display:block;
+  margin-top:16px;
+  font-weight:700;
+  text-align:right;
+  color:var(--pink2);
+}
+
+
+.quote-content img{
+  width:260px;
+  filter:drop-shadow(0 10px 30px rgba(255,43,213,0.25));
+}
+
+@media(max-width:900px){
+  .quote-content{
+    flex-direction:column;
+    text-align:center;
+  }
+}
+/* WHY ME */
+.why-me{
+  padding:90px 20px;
+  text-align:center;
+  background:var(--bg);
+}
+
+
+.why-me h2{
+  font-size:48px;
+  margin-bottom:10px;
+}
+
+.why-sub{
+  font-size:22px;
+  opacity:.7;
+  margin-bottom:50px;
+}
+
+.why-grid{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:40px;
+}
+
+.why-card{
+  font-size:18px;
+}
+
+.why-card h3{
+  margin-top:20px;
+  font-size:26px;
+}
+
+@media(max-width:900px){
+  .why-grid{
+    grid-template-columns:1fr;
+  }
+}
+.why-card{
+  font-size:18px;
+  background:var(--card);
+  padding:30px 20px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(255,43,213,0.08);
+}
+
+.why-card h3{
+  margin-top:20px;
+  font-size:26px;
+  color:var(--pink2);
+}
+.quote-block::after,
+.why-me::after{
+  content:'';
+  display:block;
+  width:120px;
+  height:3px;
+  margin:60px auto 0;
+  background:linear-gradient(90deg,var(--pink),var(--pink2));
+  border-radius:999px;
+  box-shadow:0 0 16px var(--neon);
+}
+/* LINKS */
+.links{
+  padding:90px 20px;
+  text-align:center;
+  background:var(--bg);
+}
+
+.links h2{
+  font-size:48px;
+  color:var(--pink2);
+  margin-bottom:50px;
+  text-shadow:0 0 18px var(--neon);
+}
+
+.links-grid{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+  gap:30px;
+}
+
+.link-card{
+  background:var(--card);
+  padding:30px 20px;
+  border-radius:22px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:22px;
+  font-weight:700;
+  box-shadow:0 10px 30px rgba(255,43,213,0.08);
+  transition:transform .35s, box-shadow .35s;
+}
+
+.link-card span{
+  display:block;
+  margin-top:10px;
+  font-size:16px;
+  opacity:.75;
+}
+
+.link-card:hover{
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 20px 40px rgba(255,43,213,0.18);
+}
+/* HERO */
+.hero{
+  position:relative;
+  padding:120px 20px 140px;
+  text-align:center;
+
+  /* фон чуть светлее */
+  background:linear-gradient(
+    to bottom,
+    #16161a 0%,
+    #16161a 70%,
+    var(--bg) 100%
+  );
+
+  overflow:hidden;
+}
+
+/* заголовок */
+.hero-title{
+  font-size:64px;
+  font-weight:700;
+  color:var(--pink2);
+  text-shadow:0 0 25px var(--neon), 0 0 60px var(--neon);
+  letter-spacing:2px;
+  margin:0;
+  position:relative;
+  z-index:2;
+}
+
+/* гифки */
+.hero-gif{
+  position:absolute;
+  width:90px;
+  opacity:.75;
+  pointer-events:none;
+  z-index:1;
+}
+
+/* левая гифка */
+.gif-left{
+  top:40px;
+  left:60px;
+}
+
+/* правая гифка */
+.gif-right{
+  bottom:40px;
+  right:60px;
+}
+
+/* адаптив */
+@media(max-width:900px){
+  .hero-title{
+    font-size:44px;
+  }
+
+  .hero-gif{
+    width:60px;
+  }
+
+  .gif-left{
+    left:20px;
+  }
+
+  .gif-right{
+    right:20px;
+  }
+}
+/* TO TOP BUTTON */
+#toTop{
+  position:fixed;
+  right:26px;
+  bottom:26px;
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,62,165,0.15);
+  color:var(--pink2);
+  font-size:26px;
+  font-weight:700;
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 25px rgba(255,43,213,0.25);
+  opacity:0;
+  pointer-events:none;
+  transition:.35s;
+  z-index:2000;
+}
+
+#toTop.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+#toTop:hover{
+  transform:translateY(-6px) scale(1.1);
+}
+
+#skills,
+#projects,
+#certificates,
+.why-me,
+.quote-block,
+.links{
+  background:rgba(13,13,15,0.72);
+  backdrop-filter:blur(12px);
+}
+/* =========================
+   MOBILE OPTIMIZATION
+   ========================= */
+@media (max-width: 768px){
+
+  /* общий текст */
+  body{
+    font-size:16px;
+  }
+
+  section{
+    padding:50px 16px !important;
+  }
+
+  /* HERO */
+  .hero{
+    padding:90px 16px 100px;
+  }
+
+  .hero-title{
+    font-size:40px;
+    line-height:1.2;
+  }
+
+  /* гифки в hero — уменьшаем и раздвигаем */
+  .hero-gif{
+    width:50px;
+    opacity:0.6;
+  }
+
+  .gif-left{
+    top:20px;
+    left:10px;
+  }
+
+  .gif-right{
+    bottom:20px;
+    right:10px;
+  }
+
+  /* INTRO (обо мне) */
+  .intro{
+    flex-direction:column;
+    gap:20px;
+    padding:30px 16px;
+  }
+
+  .intro img{
+    width:220px;
+  }
+
+  .intro-text p{
+    font-size:17px;
+  }
+
+  /* QUOTE */
+  .quote-content{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .quote-content img{
+    width:180px;
+    margin-top:20px;
+  }
+
+  .quote-mark{
+    display:none; /* на мобилках мешает */
+  }
+
+  /* WHY ME */
+  .why-me h2{
+    font-size:34px;
+  }
+
+  .why-sub{
+    font-size:18px;
+  }
+
+  .why-grid{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  /* SKILLS */
+  .skills-list{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .skill{
+    font-size:20px;
+    padding:30px 20px;
+  }
+
+  /* CAROUSEL */
+  .carousel-images{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .carousel-caption{
+    font-size:18px;
+  }
+
+  .carousel-btn{
+    font-size:36px;
+  }
+
+  /* LINKS */
+  .links h2{
+    font-size:34px;
+  }
+
+  .link-card{
+    font-size:18px;
+    padding:24px 18px;
+  }
+
+  /* стрелка наверх */
+  #toTop{
+    width:44px;
+    height:44px;
+    font-size:22px;
+    right:16px;
+    bottom:16px;
+  }
+}
+
   </style>
+
 </head>
+<button id="toTop" aria-label="Наверх">↑</button>
 <body>
 
 <!-- FLOATING SVG SHAPES (hearts, stars, skull) -->
@@ -112,7 +602,6 @@
 </svg>
 
 <!-- STICKERS (emoji style) -->
-<div class="sticker" style="top:120px;left:18px;">💀</div>
 <div class="sticker" style="top:80px;right:140px;animation-delay:.6s">🌙</div>
 <div class="sticker" style="bottom:120px;right:40px;animation-delay:1.2s">✨</div>
 
@@ -124,16 +613,21 @@
 <!-- MENU -->
 <nav class="menu" id="menu">
   <h3>Навигация</h3>
-  <a class="link" href="#certificates">📜 Сертификаты</a>
-  <a class="link" href="#projects">💻 Работы</a>
-  <a class="link" href="#skills">⭐ Навыки</a>
+ <a class="link" href="#intro">🖤 Обо мне</a>
+<a class="link" href="#certificates">📜 Достижения</a>
+<a class="link" href="#projects">💻 Работы</a>
+<a class="link" href="#skills">⭐ Навыки</a>
+<a class="link" href="#links">🔗 Контакты</a>
   <a class="link" href="https://tcheriktchertilov.github.io/portfolionew/" target="_blank" rel="noreferrer">⬅ Предыдущее портфолио</a>
 </nav>
 
-<header>
-  <h1 class="title">Портфолио <3</h1>
-  <h2>Emo — is my style</h2>
+<header class="hero">
+  <h1 class="hero-title">Портфолио</h1>
+  <!-- эмо-декор (по желанию) -->
+  <img src="emo-hair-flip.gif" class="hero-gif gif-left" alt="">
+  <img src="nub-nub-cat.gif" class="hero-gif gif-right" alt="">
 </header>
+
 
 <main style="position:relative; z-index:2">
   <section class="intro" id="intro">
@@ -144,23 +638,22 @@
     </div>
   </section>
 
-  <section id="certificates">
-    <h2 style="text-align:center;color:var(--pink2);font-size:44px;margin-top:6px;text-shadow:0 0 18px var(--neon)">Сертификаты</h2>
-    <div class="cert-grid">
-      <div class="certificate"><img src="cert1.jpg" alt="cert1"></div>
-      <div class="certificate"><img src="cert2.jpg" alt="cert2"></div>
-      <div class="certificate"><img src="cert3.jpg" alt="cert3"></div>
+  <section class="quote-block">
+  <div class="quote-content">
+    <div class="quote-text">
+      <span class="quote-mark">“</span>
+      <p>
+        Быть человеком — значит иметь пределы.
+        Я кое-чему научился.
+        Чем тщательнее ты строишь планы, 
+        тем больше неожиданных событий происходит.
+      </p>
+      <span class="quote-author">— Дио Брандо</span>
     </div>
-  </section>
 
-  <section id="projects">
-    <h2 style="text-align:center;color:var(--pink2);font-size:44px;margin-top:6px;text-shadow:0 0 18px var(--neon)">Мои работы</h2>
-    <div class="projects-grid">
-      <div class="project"><img src="p1.jpg" alt="p1"></div>
-      <div class="project"><img src="p2.jpg" alt="p2"></div>
-      <div class="project"><img src="p3.jpg" alt="p3"></div>
-    </div>
-  </section>
+    <img src="DIO.png" alt="dio">
+  </div>
+</section>
 
   <section id="skills">
     <h2 style="text-align:center;color:var(--pink2);font-size:44px;margin-top:6px;text-shadow:0 0 18px var(--neon)">Навыки</h2>
@@ -171,6 +664,152 @@
       <div class="skill">Python</div>
     </div>
   </section>
+
+<section class="why-me">
+  <h2>Почему же вам стоит работать<br>со мной?</h2>
+  <p class="why-sub">Мои преимущества</p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      ⭐
+      <h3>Разнообразность</h3>
+      <p>Могу работать в разных сферах и направлениях</p>
+    </div>
+
+    <div class="why-card">
+      💬
+      <h3>Коммуникабельность</h3>
+      <p>Быстрые ответы и множество вариантов контактов</p>
+    </div>
+
+    <div class="why-card">
+      💸
+      <h3>Цена</h3>
+      <p>Почти бесплатно ;)</p>
+    </div>
+  </div>
+</section>
+
+<section id="certificates">
+  <h2 style="text-align:center;color:var(--pink2);font-size:44px;text-shadow:0 0 18px var(--neon)">
+    Мои сертификаты и дипломы
+  </h2>
+
+  <div class="carousel">
+    <button class="carousel-btn prev">‹</button>
+
+    <div class="carousel-window">
+      <div class="carousel-track">
+
+        <!-- СЛАЙД 1 -->
+        <div class="carousel-slide">
+          <div class="carousel-images">
+            <img src="cert4.jpg">
+            <img src="cert5.jpg">
+            <img src="cert6.jpg">
+          </div>
+          <p class="carousel-caption">1 курс</p>
+        </div>
+
+        <!-- СЛАЙД 2 -->
+        <div class="carousel-slide">
+          <div class="carousel-images">
+            <img src="cert7.jpg">
+            <img src="cert8.jpg">
+            <img src="cert9.jpg">
+          </div>
+          <p class="carousel-caption">2 курс</p>
+        </div>
+
+        <!-- СЛАЙД 3 -->
+        <div class="carousel-slide">
+          <div class="carousel-images">
+            <img src="cert1.jpg">
+            <img src="cert2.jpg">
+            <img src="cert3.jpg">
+          </div>
+          <p class="carousel-caption">3 курс</p>
+        </div>
+
+      </div>
+    </div>
+
+    <button class="carousel-btn next">›</button>
+  </div>
+</section>
+
+
+  <section id="projects">
+  <h2 style="text-align:center;color:var(--pink2);font-size:44px;text-shadow:0 0 18px var(--neon)">
+    Мои работы
+  </h2>
+
+  <div class="carousel">
+    <button class="carousel-btn prev">‹</button>
+
+    <div class="carousel-window">
+      <div class="carousel-track">
+
+        <div class="carousel-slide">
+          <div class="carousel-images">
+            <img src="p1.jpg">
+            <img src="p2.jpg">
+            <img src="p3.jpg">
+          </div>
+          <p class="carousel-caption">Мои личные художественные работы</p>
+        </div>
+
+        <div class="carousel-slide">
+          <div class="carousel-images">
+            <img src="p4.jpg">
+            <img src="p5.jpg">
+            <img src="p6.jpg">
+          </div>
+          <p class="carousel-caption">Заказы</p>
+        </div>
+
+        <div class="carousel-slide">
+          <div class="carousel-images">
+            <img src="p7.jpg">
+            <img src="p8.jpg">
+            <img src="p9.jpg">
+          </div>
+          <p class="carousel-caption">3D работы</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-btn next">›</button>
+  </div>
+</section>
+
+<section id="links" class="links">
+  <h2>Где меня найти</h2>
+
+  <div class="links-grid">
+    <a href="https://t.me/cherikk42" target="_blank" class="link-card">
+      💬 Telegram
+      <span>@cherikk42</span>
+    </a>
+
+    <a href="https://t.me/chcherik" target="_blank" class="link-card">
+      📢 Telegram-канал
+      <span>@chcherik</span>
+    </a>
+
+    <a href="https://instagram.com/cherishh.cherry" target="_blank" class="link-card">
+      📸 Instagram
+      <span>@cherishh.cherry</span>
+    </a>
+
+    <a href="mailto:sony.krush@gmail.com" class="link-card">
+      ✉ Почта
+      <span>sony.krush@gmail.com</span>
+    </a>
+  </div>
+</section>
+
+
 
   <footer>© 2025 София — Связь: <a href="mailto:sony.krush@gmail.com">sony.krush@gmail.com</a></footer>
 </main>
@@ -183,6 +822,13 @@
     burger.classList.toggle('active');
     menu.classList.toggle('open');
   });
+  document.querySelectorAll('.menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    burger.classList.remove('active');
+    menu.classList.remove('open');
+  });
+});
+
 
   // Typing effect
   (function(){
@@ -205,6 +851,47 @@
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
   },{threshold:0.18});
   document.querySelectorAll('section').forEach(s=>io.observe(s));
+ //carousel
+document.querySelectorAll('.carousel').forEach(carousel => {
+  const track = carousel.querySelector('.carousel-track');
+  const slides = carousel.querySelectorAll('.carousel-slide');
+  const prev = carousel.querySelector('.carousel-btn.prev');
+  const next = carousel.querySelector('.carousel-btn.next');
+
+  let index = 0;
+
+  function update(){
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  next.addEventListener('click', () => {
+    index = (index + 1) % slides.length;
+    update();
+  });
+
+  prev.addEventListener('click', () => {
+    index = (index - 1 + slides.length) % slides.length;
+    update();
+  });
+});
+// Scroll to top button
+const toTop = document.getElementById('toTop');
+
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 400){
+    toTop.classList.add('show');
+  } else {
+    toTop.classList.remove('show');
+  }
+});
+
+toTop.addEventListener('click', () => {
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+});
+
 </script>
 </body>
 </html>
