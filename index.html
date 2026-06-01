@@ -12,6 +12,7 @@
       box-sizing: border-box;
     }
 
+
     :root {
       --bg: #fff9f5;
       --bg-card: #ffffff;
@@ -20,11 +21,10 @@
       --accent-primary: #e8b4b8;
       --accent-secondary: #b8d8e0;
       --accent-tertiary: #d4b8d9;
-      --glow: 0 4px 20px rgba(232, 180, 184, 0.2);
+      --glow: 0 4px 20px rgba(232, 180, 184, 0.3);
       --border: #f0e0e4;
-      --shadow: 0 10px 30px rgba(90, 74, 90, 0.08);
+      --shadow: 0 15px 40px rgba(90, 74, 90, 0.1);
       --gradient: linear-gradient(135deg, #e8b4b8, #d4b8d9);
-      --flower-opacity: 0.4;
     }
 
 
@@ -36,11 +36,10 @@
       --accent-primary: #c084fc;
       --accent-secondary: #a855f7;
       --accent-tertiary: #7c3aed;
-      --glow: 0 0 15px rgba(160, 120, 255, 0.3);
+      --glow: 0 0 20px rgba(160, 120, 255, 0.3);
       --border: #3a2a4a;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
       --gradient: linear-gradient(135deg, #c084fc, #7c3aed);
-      --flower-opacity: 0.15;
     }
 
     body {
@@ -52,38 +51,57 @@
       line-height: 1.5;
     }
 
-    /* Плавные переходы для всех элементов */
+
     * {
       transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Фоновые цветочки (только декор) */
-    .flower-bg {
+
+    .flower-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
+      pointer-events: auto;
       z-index: 0;
-      opacity: var(--flower-opacity);
-    }
-    .flower {
-      position: absolute;
-      font-size: 2rem;
-      animation: floatFlower 12s ease-in-out infinite;
-    }
-    @keyframes floatFlower {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(5deg); }
+      overflow: hidden;
     }
 
-    /* Кастомный скролл */
+    .floating-flower {
+      position: absolute;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s;
+      animation: floatFlower 8s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+
+    .floating-flower:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes floatFlower {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-25px) rotate(8deg); }
+    }
+
+    /* Анимация лопания */
+    @keyframes pop {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+    .flower-pop {
+      animation: pop 0.3s ease-out forwards !important;
+    }
+
+
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--bg-card); border-radius: 10px; }
     ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 10px; }
 
-    /* Кнопка переключения темы */
+
     .theme-toggle {
       position: fixed;
       top: 20px;
@@ -100,12 +118,9 @@
       justify-content: center;
       box-shadow: var(--shadow);
       z-index: 1003;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s;
     }
-    .theme-toggle:hover {
-      transform: scale(1.08);
-      box-shadow: var(--glow);
-    }
+    .theme-toggle:hover { transform: scale(1.08); }
 
     /* Burger Menu */
     .burger {
@@ -126,15 +141,9 @@
       border-radius: 4px;
       transition: all 0.35s;
     }
-    .burger.active div:nth-child(1) {
-      transform: translateY(12px) rotate(45deg);
-    }
-    .burger.active div:nth-child(2) {
-      opacity: 0;
-    }
-    .burger.active div:nth-child(3) {
-      transform: translateY(-12px) rotate(-45deg);
-    }
+    .burger.active div:nth-child(1) { transform: translateY(12px) rotate(45deg); }
+    .burger.active div:nth-child(2) { opacity: 0; }
+    .burger.active div:nth-child(3) { transform: translateY(-12px) rotate(-45deg); }
 
     /* Menu */
     nav.menu {
@@ -145,7 +154,7 @@
       height: 100%;
       background: var(--bg-card);
       padding: 80px 24px;
-      transition: right 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      transition: right 0.4s;
       z-index: 1001;
       border-left: 1px solid var(--border);
       box-shadow: var(--shadow);
@@ -179,10 +188,10 @@
       color: white;
     }
 
-    /* Hero */
+
     .hero {
       position: relative;
-      padding: 120px 20px 80px;
+      padding: 100px 20px 60px;
       text-align: center;
       z-index: 2;
     }
@@ -196,57 +205,70 @@
       letter-spacing: 2px;
     }
 
-    /* Intro */
+
     .intro {
       display: flex;
-      gap: 48px;
+      gap: 60px;
       align-items: center;
       justify-content: center;
-      padding: 50px 30px;
-      max-width: 1200px;
+      padding: 60px 40px;
+      max-width: 1300px;
       margin: 0 auto;
       z-index: 2;
       position: relative;
     }
     .intro-img-wrapper {
       position: relative;
+      flex-shrink: 0;
     }
     .intro-img-wrapper::before {
       content: '🌸';
       position: absolute;
-      top: -20px;
-      left: -20px;
-      font-size: 32px;
-      opacity: 0.6;
+      top: -25px;
+      left: -25px;
+      font-size: 42px;
+      opacity: 0.7;
+      pointer-events: none;
     }
     .intro-img-wrapper::after {
       content: '✨';
       position: absolute;
-      bottom: -20px;
-      right: -20px;
-      font-size: 28px;
-      opacity: 0.6;
+      bottom: -25px;
+      right: -25px;
+      font-size: 38px;
+      opacity: 0.7;
+      pointer-events: none;
     }
     .intro img {
-      width: 280px;
-      border-radius: 100px 30px 100px 30px;
+      width: 380px;
+      border-radius: 120px 40px 120px 40px;
       box-shadow: var(--shadow);
       transition: transform 0.4s;
     }
-    .intro img:hover { transform: scale(1.02); }
+    .intro img:hover { transform: scale(1.03); }
+    
+    .intro-text {
+      max-width: 700px;
+    }
     .typing {
-      font-size: 28px;
-      font-weight: 600;
+      font-size: 38px;
+      font-weight: 700;
       background: var(--gradient);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      border-right: 3px solid var(--accent-primary);
+      border-right: 4px solid var(--accent-primary);
       white-space: nowrap;
       overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .intro-text p {
+      font-size: 22px;
+      line-height: 1.6;
+      color: var(--text);
     }
 
-    /* Quote */
+
     .quote-block {
       padding: 60px 20px;
       background: rgba(232, 180, 184, 0.1);
@@ -277,7 +299,6 @@
       left: 20px;
       color: var(--accent-primary);
       opacity: 0.3;
-      font-family: serif;
     }
     .quote-author {
       display: block;
@@ -292,7 +313,7 @@
       box-shadow: var(--shadow);
     }
 
-    /* Skills */
+    /* Навыки */
     .skills-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -308,30 +329,24 @@
       text-align: center;
       font-size: 24px;
       font-weight: 700;
-      cursor: pointer;
       transition: all 0.3s;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
-    .skill:hover {
-      transform: translateY(-8px);
-      background: var(--accent-primary);
-      color: white;
-    }
+    .skill:hover { transform: translateY(-8px); background: var(--accent-primary); color: white; }
 
     /* Why Me */
     .why-me {
       padding: 70px 20px;
       text-align: center;
     }
-    .why-me h2 { font-size: 44px; font-weight: 500; margin-bottom: 10px; }
-    .why-sub { color: var(--text-light); margin-bottom: 50px; }
+    .why-me h2 { font-size: 44px; font-weight: 500; }
     .why-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 35px;
       max-width: 1100px;
-      margin: 0 auto;
+      margin: 40px auto;
     }
     .why-card {
       background: var(--bg-card);
@@ -341,7 +356,7 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
-    .why-card:hover { transform: translateY(-8px); box-shadow: var(--glow); }
+    .why-card:hover { transform: translateY(-8px); }
     .why-card h3 { font-size: 26px; margin: 15px 0; color: var(--accent-primary); }
 
     /* Carousels */
@@ -367,9 +382,8 @@
       border-radius: 28px;
       box-shadow: var(--shadow);
       transition: all 0.3s;
-      cursor: pointer;
     }
-    .carousel-images img:hover { transform: scale(1.03); box-shadow: var(--glow); }
+    .carousel-images img:hover { transform: scale(1.03); }
     .carousel-caption {
       text-align: center;
       margin-top: 16px;
@@ -387,13 +401,8 @@
       border-radius: 50%;
       cursor: pointer;
       transition: all 0.2s;
-      box-shadow: var(--shadow);
     }
-    .carousel-btn:hover {
-      background: var(--accent-primary);
-      color: white;
-      transform: scale(1.05);
-    }
+    .carousel-btn:hover { background: var(--accent-primary); color: white; transform: scale(1.05); }
 
     /* Links */
     .links {
@@ -427,11 +436,7 @@
       font-size: 14px;
       opacity: 0.7;
     }
-    .link-card:hover {
-      transform: translateY(-8px);
-      background: var(--accent-secondary);
-      color: white;
-    }
+    .link-card:hover { transform: translateY(-8px); background: var(--accent-secondary); color: white; }
 
     /* To Top */
     #toTop {
@@ -463,24 +468,25 @@
     }
     footer a { color: var(--accent-primary); text-decoration: none; }
 
-    /* Animations */
+    /* Анимация появления секций */
     section { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
     section.show { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 900px) {
-      .intro { flex-direction: column; padding: 30px 20px; }
-      .typing { font-size: 22px; white-space: normal; border-right: none; }
-      .why-grid { grid-template-columns: 1fr; gap: 20px; }
+      .intro { flex-direction: column; padding: 30px 20px; gap: 30px; }
+      .intro img { width: 260px; }
+      .typing { font-size: 28px; white-space: normal; border-right: none; }
+      .intro-text p { font-size: 18px; }
+      .why-grid { grid-template-columns: 1fr; }
       .carousel-images { grid-template-columns: 1fr; }
       .hero-title { font-size: 42px; }
-      .quote-content { flex-direction: column; text-align: center; }
       .burger { right: 20px; top: 20px; }
       .theme-toggle { top: 20px; right: 80px; }
     }
   </style>
 </head>
 <body>
-<div class="flower-bg" id="flowerBg"></div>
+<div class="flower-container" id="flowerContainer"></div>
 <button class="theme-toggle" id="themeToggle">🌙</button>
 <div class="burger" id="burger"><div></div><div></div><div></div></div>
 <nav class="menu" id="menu">
@@ -500,7 +506,7 @@
     <div class="intro-img-wrapper"><img src="your-photo.PNG" alt="София"></div>
     <div class="intro-text">
       <p class="typing" id="typing">Привет! Я — София, разработчик и дизайнер.</p>
-      <p style="margin-top: 20px;">Я создаю интерактивные проекты, смешиваю 3D и веб. В моих работах — внимание к деталям, аккуратный код и насыщенный визуал. Учусь в ГПОАУ АО АПК на специальности: 09.02.07 Информационные системы и программирование.</p>
+      <p>Я создаю интерактивные проекты, смешиваю 3D и веб. В моих работах — внимание к деталям, аккуратный код и насыщенный визуал. Учусь в ГПОАУ АО АПК на специальности: 09.02.07 Информационные системы и программирование.</p>
     </div>
   </section>
 
@@ -539,7 +545,7 @@
     </div>
   </section>
 
-  <section class="why-me"><h2>Почему же вам стоит работать<br>со мной?</h2><p class="why-sub">Мои преимущества</p>
+  <section class="why-me"><h2>Почему же вам стоит работать<br>со мной?</h2><p class="why-sub" style="color: var(--text-light); margin-bottom: 20px;">Мои преимущества</p>
     <div class="why-grid">
       <div class="why-card">⭐<h3>Разнообразность</h3><p>Могу работать в разных сферах и направлениях</p></div>
       <div class="why-card">💬<h3>Коммуникабельность</h3><p>Быстрые ответы и множество вариантов контактов</p></div>
@@ -549,32 +555,75 @@
 
   <section id="links" class="links"><h2>Где меня найти</h2>
     <div class="links-grid">
-      <a href="https://t.me/cherikk42" target="_blank" class="link-card">💬 Telegram<span>@shio_42</span></a>
-      <a href="https://t.me/chcherik" target="_blank" class="link-card">📢 Telegram-канал<span>@shiowaitsfordeath</span></a>
+      <a href="https://t.me/cherikk42" target="_blank" class="link-card">💬 Telegram<span>@cherikk42</span></a>
+      <a href="https://t.me/chcherik" target="_blank" class="link-card">📢 Telegram-канал<span>@chcherik</span></a>
       <a href="https://instagram.com/cherishh.cherry" target="_blank" class="link-card">📸 Instagram<span>@cherishh.cherry</span></a>
       <a href="mailto:sony.krush@gmail.com" class="link-card">✉ Почта<span>sony.krush@gmail.com</span></a>
     </div>
   </section>
-  <footer>© 2026 София — <a href="mailto:sony.krush@gmail.com">sony.krush@gmail.com</a></footer>
+  <footer>© 2025 София — <a href="mailto:sony.krush@gmail.com">sony.krush@gmail.com</a></footer>
 </main>
 <button id="toTop">↑</button>
 
 <script>
-  // Плавающие цветочки
-  const flowers = ['🌸', '🌼', '🌷', '🌺', '🌸', '🌿', '✨', '🍃'];
-  for (let i = 0; i < 24; i++) {
-    let f = document.createElement('div');
-    f.className = 'flower';
-    f.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-    f.style.left = Math.random() * 100 + '%';
-    f.style.top = Math.random() * 100 + '%';
-    f.style.fontSize = (Math.random() * 24 + 16) + 'px';
-    f.style.animationDelay = (Math.random() * 10) + 's';
-    f.style.animationDuration = (Math.random() * 8 + 8) + 's';
-    document.getElementById('flowerBg').appendChild(f);
+
+  const flowersList = ['🌸', '🌼', '🌷', '🌺', '🌸', '🌿', '🍃', '🌻', '🌹', '💮'];
+  const container = document.getElementById('flowerContainer');
+  
+
+  for (let i = 0; i < 28; i++) {
+    createFloatingFlower();
+  }
+  
+  function createFloatingFlower() {
+    const flower = document.createElement('div');
+    flower.className = 'floating-flower';
+    flower.textContent = flowersList[Math.floor(Math.random() * flowersList.length)];
+    flower.style.left = Math.random() * 100 + '%';
+    flower.style.top = Math.random() * 100 + '%';
+    flower.style.fontSize = (Math.random() * 28 + 20) + 'px';
+    flower.style.animationDuration = (Math.random() * 8 + 6) + 's';
+    flower.style.animationDelay = (Math.random() * 5) + 's';
+    
+
+    flower.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      flower.classList.add('flower-pop');
+      
+
+      for (let i = 0; i < 6; i++) {
+        const particle = document.createElement('div');
+        particle.textContent = ['🌸', '✨', '💮', '🌼'][Math.floor(Math.random() * 4)];
+        particle.style.position = 'fixed';
+        particle.style.left = e.clientX + (Math.random() - 0.5) * 40 + 'px';
+        particle.style.top = e.clientY + (Math.random() - 0.5) * 40 + 'px';
+        particle.style.fontSize = (Math.random() * 16 + 12) + 'px';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '2000';
+        particle.style.opacity = '1';
+        particle.style.transition = 'all 0.5s ease-out';
+        document.body.appendChild(particle);
+        
+        setTimeout(() => {
+          particle.style.transform = `translate(${(Math.random() - 0.5) * 80}px, ${(Math.random() - 0.5) * 80 - 40}px)`;
+          particle.style.opacity = '0';
+          setTimeout(() => particle.remove(), 500);
+        }, 10);
+      }
+      
+
+      setTimeout(() => {
+        flower.remove();
+
+        createFloatingFlower();
+      }, 300);
+    });
+    
+    container.appendChild(flower);
   }
 
-  // Theme Toggle
+
   const toggle = document.getElementById('themeToggle');
   toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
@@ -582,22 +631,31 @@
     toggle.textContent = isDark ? '☀️' : '🌙';
   });
 
-  // Burger
+
   const burger = document.getElementById('burger'), menu = document.getElementById('menu');
   burger.addEventListener('click', () => { burger.classList.toggle('active'); menu.classList.toggle('open'); });
   document.querySelectorAll('.menu a').forEach(l => l.addEventListener('click', () => { burger.classList.remove('active'); menu.classList.remove('open'); }));
 
-  // Typing
+
   const typingEl = document.getElementById('typing'), orig = typingEl.textContent.trim();
-  typingEl.textContent = ''; let idx = 0;
-  function type() { if(idx <= orig.length) { typingEl.textContent = orig.slice(0, idx); idx++; setTimeout(type, 45); } else typingEl.style.borderRight = 'none'; }
+  typingEl.textContent = ''; 
+  let idx = 0;
+  function type() { 
+    if (idx <= orig.length) { 
+      typingEl.textContent = orig.slice(0, idx); 
+      idx++; 
+      setTimeout(type, 45); 
+    } else { 
+      typingEl.style.borderRight = 'none'; 
+    } 
+  }
   type();
 
-  // Observer
+
   const observer = new IntersectionObserver(e => e.forEach(e => e.isIntersecting && e.target.classList.add('show')), { threshold: 0.15 });
   document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-  // Carousels
+  // === КАРУСЕЛИ ===
   document.querySelectorAll('.carousel').forEach(c => {
     const track = c.querySelector('.carousel-track'), slides = c.querySelectorAll('.carousel-slide'), prev = c.querySelector('.prev'), next = c.querySelector('.next');
     let index = 0;
@@ -606,7 +664,7 @@
     prev?.addEventListener('click', () => { index = (index - 1 + slides.length) % slides.length; update(); });
   });
 
-  // To Top
+
   const toTop = document.getElementById('toTop');
   window.addEventListener('scroll', () => toTop.classList.toggle('show', window.scrollY > 300));
   toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
